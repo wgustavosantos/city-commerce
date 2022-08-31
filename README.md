@@ -83,9 +83,8 @@ Desenvolvimento de uma aplicação frontend com ReactJS, para o cadastro de pont
 ---
 ### Diagrama da arquitetura do server Spring com Spring Security
 
-![SS](https://user-images.githubusercontent.com/77124683/187604949-fc00d67f-2abe-4633-a2b7-89121b725a33.png)
+![Estrutura](https://user-images.githubusercontent.com/77124683/187668273-41023f32-9867-4717-a17d-dee20239c759.png)
 ---
-
 - **WebSecurityConfigurerAdapter** é o cerne da implementação de segurança. Ele fornece **HttpSecurity** configurações para configurar cors, csrf, gerenciamento de sessão, regras para recursos protegidos. Também podemos estender e personalizar a configuração padrão que contém os elementos abaixo.
 
 – **UserDetailsService** *interface* tem um método para carregar usuário por nome de usuário e retorna um **UserDetails** objeto que Spring Security pode usar para autenticação e validação.
@@ -108,6 +107,9 @@ Desenvolvimento de uma aplicação frontend com ReactJS, para o cadastro de pont
 
 ### Estrutura do Projeto
 ![Estrutura](https://user-images.githubusercontent.com/77124683/187605602-834589b2-553f-42f7-869f-41ac4dcb2fb9.png)
+---
+### Padronização de Erros com a RFC 7807 Problem Details for HTTP APIs
+A RFC 7807 é uma especificação que visa padronizar os formatos de mensagens de erro em APIs HTTP, para assim evitar que novos formatos sejam criados.
 ---
 ### Versões
 - Java 17
