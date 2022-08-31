@@ -83,7 +83,7 @@ Desenvolvimento de uma aplicação frontend com ReactJS, para o cadastro de pont
 ---
 ### Diagrama da arquitetura do server Spring com Spring Security
 
-![Estrutura](https://user-images.githubusercontent.com/77124683/187668273-41023f32-9867-4717-a17d-dee20239c759.png)
+![SS](https://user-images.githubusercontent.com/77124683/187675234-e5d60fea-0057-4c15-8501-dad3edb19296.png)
 ---
 - **WebSecurityConfigurerAdapter** é o cerne da implementação de segurança. Ele fornece **HttpSecurity** configurações para configurar cors, csrf, gerenciamento de sessão, regras para recursos protegidos. Também podemos estender e personalizar a configuração padrão que contém os elementos abaixo.
 
