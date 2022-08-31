@@ -76,3 +76,74 @@ Desenvolvimento de uma aplicação frontend com ReactJS, para o cadastro de pont
   - Strategy
   - Template Method
 - Mysql
+
+---
+### Diagrama de fluxo de requisições da api
+![api](https://user-images.githubusercontent.com/77124683/187604618-aa130ca3-41d7-4722-95e5-4516593e3bb9.png)
+---
+### Diagrama da arquitetura do server Spring com Spring Security
+
+![SS](https://user-images.githubusercontent.com/77124683/187604949-fc00d67f-2abe-4633-a2b7-89121b725a33.png)
+---
+
+- **WebSecurityConfigurerAdapter** é o cerne da implementação de segurança. Ele fornece **HttpSecurity** configurações para configurar cors, csrf, gerenciamento de sessão, regras para recursos protegidos. Também podemos estender e personalizar a configuração padrão que contém os elementos abaixo.
+
+– **UserDetailsService** *interface* tem um método para carregar usuário por nome de usuário e retorna um **UserDetails** objeto que Spring Security pode usar para autenticação e validação.
+
+– **UserDetails** contém as informações necessárias (como: nome de usuário, senha, autoridades) para construir um objeto Autenticação.
+
+– **UsernamePasswordAuthenticationToken** obtém {email, password} da solicitação de login, **AuthenticationManager** usará para autenticar uma conta de login.
+
+– **AuthenticationManager** tem um **DaoAuthenticationProvider** (com ajuda de **UserDetailsService& PasswordEncoder**) para validar o **UsernamePasswordAuthenticationToken** objeto. Se for bem-sucedido, **AuthenticationManager** retornará um objeto do tipo Authentication totalmente preenchido (incluindo autoridades concedidas).
+
+– **OncePerRequestFilter** faz uma única execução para cada solicitação à nossa API. Ele fornece um **doFilterInternal()** método que implementaremos analisando e validando o JWT, carregando os detalhes do usuário (usando **UserDetailsService**), verificando a autorização (usando **UsernamePasswordAuthenticationToken**).
+
+– **AuthenticationEntryPoint** detectará o erro de autenticação.
+
+- O  serviço contém **UsuarioService** para trabalhar com o repositório que contém **UserRepository** para trabalhar com Banco de Dados, que será importado para o Controller.
+
+- O controlador recebe e manipula a solicitação depois que ela foi filtrada por **OncePerRequestFilter**.
+
+- UsuarioController também lida com solicitações de inscrição/login/recuperar-senha.
+
+### Estrutura do Projeto
+![Estrutura](https://user-images.githubusercontent.com/77124683/187605602-834589b2-553f-42f7-869f-41ac4dcb2fb9.png)
+---
+### Versões
+- Java 17
+- Spring 2.6.3
+- Maven 4.0.0
+- jjwt 0.7.0
+- Mysql 8.0
+
+### Propriedades
+
+Você deve utilizar suas proprias credenciais no application.properties
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/commercedb?createDatabaseIfNotExist=true&serverTimezone=UTC
+spring.datasource.username=wgroot // username do banco de dados
+spring.datasource.password=admin // senha do banco de dados
+
+#spring.jpa.generate-ddl=true 
+spring.jpa.hibernate.ddl-auto=create // recria as tabelas no banco
+
+spring.security.user.name=wgroot
+spring.security.user.password=admin
+
+jwt.secret=SequenciaParaAssinarToken
+jwt.expiration=60000 //60 mil milissegundos é 1 minuto
+
+default.sender=guto15santos@gmail.com //email padrao
+default.recipient=guto15santos@gmail.com //email padrao
+
+spring.mail.host=smtp.gmail.com
+spring.mail.username=guto15santos // antes do @gmail
+spring.mail.password= //configurar senha de apps menos seguro nas configurações de segurança da sua conta google
+spring.mail.properties.mail.smtp.auth = true
+spring.mail.properties.mail.smtp.socketFactory.port = 465
+spring.mail.properties.mail.smtp.socketFactory.class = javax.net.ssl.SSLSocketFactory
+spring.mail.properties.mail.smtp.socketFactory.fallback = false
+spring.mail.properties.mail.smtp.starttls.enable = true
+spring.mail.properties.mail.smtp.ssl.enable = true
+```
